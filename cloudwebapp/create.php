@@ -27,6 +27,19 @@ if (isset($_POST['submit'])) {
     <input type="text" name="studentID" id="studentID"><br>
     <label for="deptID">Department ID</label>
     <input type="text" name="deptID" id="deptID"><br>
+
+    <select name="deptID">
+    <option value=""><-- Please Select --></option>
+    <?php
+    $objQuery = mysqli_query($conn,"SELECT deptName FROM department ORDER BY deptID ASC");
+    while($objResuut = mysqli_fetch_array($objQuery))
+    {
+        ?>
+        <option value="<?php echo $objResuut["deptID"];?>"><?php echo $objResuut["deptID"]." - ".$objResuut["deptName"];?></option>
+        <?php
+        }?>
+        </select>
+
     <input type="submit" name="submit" value="Submit">
 </form>
 
