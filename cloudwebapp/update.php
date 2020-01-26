@@ -8,15 +8,13 @@ if (isset($_POST['submit'])) {
     $deptID = $_POST['deptID'];
     $conn = mysqli_init();
 
-    if ($stmt = mysqli_prepare($conn, "INSERT INTO students (stdID, fname, lname, deptID) VALUES (?, ?, ?, ?)"));
-    mysqli_stmt_bind_param($stmt, 'ssss', $stdID, $fname, $lname, $deptID);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
+if ($stmt = mysqli_prepare($conn, "UPDATE students (stdID, fname, lname, deptID) VALUES (?, ?, ?, ?)"));
+mysqli_stmt_bind_param($stmt, 'ssss', $stdID, $fname, $lname, $deptID);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
 ?>
-
-<?php include "templates/header.php";?>
-<h2>Add a student</h2>
+<h2>Update a Students</h2>
 
 <form method="post">
     <label for="firstname">First Name</label>
@@ -32,4 +30,6 @@ if (isset($_POST['submit'])) {
 
 <a href="index.php">Back to HOME</a>
 </div>
-<?php include "templates/footer.php";?>
+
+
+
