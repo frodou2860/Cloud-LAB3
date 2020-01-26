@@ -28,12 +28,14 @@ if (isset($_POST['submit'])) {
 
     <select name="deptID">
     <option value=""><-- Please Select --></option>
-    <?php
-    $objQuery = mysqli_query($conn,'SELECT deptName, deptID FROM department ORDER BY deptID ASC');
-    while($objResuut = mysqli_fetch_array($objQuery)) { ?>
-        <option value="<?php echo $objResuut["deptID"];?>"><?php echo $objResuut["deptID"]." - ".$objResuut["deptName"];?></option>
-    <?php }
-    mysqli_close($conn);?>
+
+    <?php $res = mysqli_query($conn2,'SELECT deptName, deptID FROM department');
+        while($option = mysqli_fetch_assoc($res)) { ?>
+
+    <option value="<?php echo $option['deptID'];?>"><?php echo $option['deptName'];?></option>
+
+    <?php }    
+    mysqli_close($conn2);?>
     </select><br>
 
 

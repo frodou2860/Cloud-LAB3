@@ -6,6 +6,24 @@ $res = mysqli_query($conn, 'SELECT stdID, fname, lname, deptName FROM students, 
 <?php require "templates/header.php"; ?>
 
 <h2>Show all the students</h2>
+<?php
+    $strKeyword = null;
+    if(isset($_POST["txtKeyword"]))
+    {
+        $strKeyword = $_POST["txtKeyword"];
+        $res = mysqli_query($conn, 'SELECT stdID, fname, lname, deptName FROM students, department WHERE students.deptID = department.deptID AND stdID LIKE '%".$strKeyword."%'');
+    }
+?>
+<form name="frmSearch" method="get" action="<?php echo $_SERVER['SCRIPT_NAME'];?>">
+    <table width="599">
+        <tr>
+            <th>Keyword
+            <input name="txtKeyword" type="text" id="txtKeyword" value="<?php echo $strKeyword;?>">
+            <input type="submit" value="Search"></th>
+        </tr>
+    </table>
+</form>
+
 <table>
     <thead>
         <tr>
