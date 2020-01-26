@@ -1,18 +1,28 @@
 <?php
+require "config/connection.php";
+$res1 = mysqli_query($conn,'SELECT  * FROM department');
 if (isset($_POST['submit'])) {
-    require "config/connection.php";
-}
+    
+
     $fname = $_POST['firstname'];
     $lname = $_POST['lastname'];
     $stdID = $_POST['studentID'];
     $deptID = $_POST['deptID'];
     $conn = mysqli_init();
 
-    if ($stmt = mysqli_prepare($conn, "INSERT INTO students (stdID, fname, lname, deptID) VALUES (?, ?, ?, ?)"));
+    $sql= "INSERT INTO students (stdID, fname, lname, deptID) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'ssss', $stdID, $fname, $lname, $deptID);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
+
+    if(!isset($sql)){
+        die ("Error $sql" .mysqli_connect_error());
+    }else{
+        header("location: index.php");  
+    }
+}
 ?>
 
 <?php include "templates/header.php";?>
@@ -28,15 +38,14 @@ if (isset($_POST['submit'])) {
     <label for="deptID">Department ID</label>
 
     <select name="deptID" id="deptID" >
-    <option value=""><-- Please Select --></option>
+        <option value=""><-- Please Select --></option>
 
-    <?php $res = mysqli_query($conn2,'SELECT  deptID,deptName FROM department');
-        while($option = mysqli_fetch_assoc($res)) { ?>
-
-        <option><?php echo $option['deptID'] .' : '. $option['deptName']; ?> </option>
-
-    <?php }    
-    mysqli_close($conn2);?>
+        <?php 
+             
+          while($row = mysqli_fetch_array($res1)) {
+              echo "<option value='".$row['deptID']."'>".$row['deptName']."</option>";
+          } 
+              mysqli_close($conn);?>
     </select><br>
 
 

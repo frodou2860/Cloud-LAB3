@@ -1,24 +1,24 @@
 <?php
 require "config/connection.php";
-$res = mysqli_query($conn, 'SELECT stdID, fname, lname, deptName FROM students, department WHERE students.deptID = department.deptID');
+$res = mysqli_query($conn, 'SELECT stdID, fname, lname, deptName FROM students, department WHERE students.deptID = department.deptID ');
+
+if(isset($_GET['txtKeyword']) ){
+    $stdID = $_GET['txtKeyword'];
+    $sql = "SELECT stdID, fname, lname, deptName FROM students,department 
+    WHERE students.deptID = department.deptID AND stdID LIKE '%$stdID%' ";
+    $res = mysqli_query($conn, $sql);
+}
 ?>
 
 <?php require "templates/header.php"; ?>
 
 <h2>Show all the students</h2>
-<?php
-    $strKeyword = null;
-    if(isset($_POST["txtKeyword"]))
-    {
-        $strKeyword = $_POST["txtKeyword"];
-        $res = mysqli_query($conn, 'SELECT stdID, fname, lname, deptName FROM students, department WHERE students.deptID = department.deptID AND stdID LIKE '%".$strKeyword."%'');
-    }
-?>
-<form name="frmSearch" method="get" action="<?php echo $_SERVER['SCRIPT_NAME'];?>">
+
+<form name="frmSearch" method="GET" >
     <table width="599">
         <tr>
             <th>Keyword
-            <input name="txtKeyword" type="text" id="txtKeyword" value="<?php echo $strKeyword;?>">
+            <input name="txtKeyword" type="text" id="txtKeyword">
             <input type="submit" value="Search"></th>
         </tr>
     </table>
