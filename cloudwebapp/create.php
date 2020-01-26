@@ -25,7 +25,6 @@ if (isset($_POST['submit'])) {
     <label for="studentID">Student ID</label>
     <input type="text" name="studentID" id="studentID"><br>
     <label for="deptID">Department ID</label>
-    <input type="text" name="deptID" id="deptID"><br>
 
     <select name="deptID">
     <option value=""><-- Please Select --></option>
@@ -36,8 +35,8 @@ if (isset($_POST['submit'])) {
         ?>
         <option value="<?php echo $objResuut["deptID"];?>"><?php echo $objResuut["deptID"]." - ".$objResuut["deptName"];?></option>
         <?php
-        }?>
-        </select>
+        }mysqli_close($conn);?>
+        </select><br>
 
     <input type="submit" name="submit" value="Submit">
 </form>
