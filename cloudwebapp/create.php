@@ -26,13 +26,13 @@ if (isset($_POST['submit'])) {
     <input type="text" name="studentID" id="studentID"><br>
     <label for="deptID">Department ID</label>
 
-    <select name="deptID">
+    <select name="deptID" id="deptID" >
     <option value=""><-- Please Select --></option>
 
-    <?php $res = mysqli_query($conn2,'SELECT deptName, deptID FROM department');
+    <?php $res = mysqli_query($conn2,'SELECT  deptID,deptName FROM department');
         while($option = mysqli_fetch_assoc($res)) { ?>
 
-    <option value="<?php echo $option['deptID'];?>"><?php echo $option['deptName'];?></option>
+        <option><?php echo $option['deptID'] .' : '. $option['deptName']; ?> </option>
 
     <?php }    
     mysqli_close($conn2);?>
