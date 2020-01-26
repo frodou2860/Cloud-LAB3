@@ -6,6 +6,7 @@ if (isset($_POST['submit'])) {
     $lname = $_POST['lastname'];
     $stdID = $_POST['studentID'];
     $deptID = $_POST['deptID'];
+    $conn = mysqli_init();
 
     if ($stmt = mysqli_prepare($conn, "INSERT INTO students (stdID, fname, lname, deptID) VALUES (?, ?, ?, ?)"));
     mysqli_stmt_bind_param($stmt, 'ssss', $stdID, $fname, $lname, $deptID);
