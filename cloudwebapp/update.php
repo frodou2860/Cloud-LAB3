@@ -25,7 +25,7 @@ mysqli_close($conn);
     <input type="text" name="studentID" id="studentID"><br>
     <label for="deptID">Department ID</label>
     <input type="text" name="deptID" id="deptID"><br>
-    <input type="submit" name="submit" value="Submit">
+    <input type="update" name="update" value="Update">
 </form>
 
 <a href="index.php">Back to HOME</a>
