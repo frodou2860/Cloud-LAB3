@@ -8,7 +8,6 @@ if (isset($_POST['submit'])) {
     $lname = $_POST['lastname'];
     $stdID = $_POST['studentID'];
     $deptID = $_POST['deptID'];
-    $conn = mysqli_init();
 
     $sql= "INSERT INTO students (stdID, fname, lname, deptID) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
@@ -24,6 +23,15 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+
+<script>
+    function confirmSubmit() { 
+        var ans = confirm("Do you want to submit");
+    if (ans==true){
+        document.location = "index.php"
+    }
+}
+</script>
 
 <?php include "templates/header.php";?>
 <h2>Add a student</h2>
@@ -48,8 +56,7 @@ if (isset($_POST['submit'])) {
               mysqli_close($conn);?>
     </select><br>
 
-
-    <input type="submit" name="submit" value="Submit">
+    <button type="submit" name="submit" id="submit" onclick='confirmSubmit()'><strong>Submit</strong></button>
 </form>
 
 <a href="index.php">Back to HOME</a>
